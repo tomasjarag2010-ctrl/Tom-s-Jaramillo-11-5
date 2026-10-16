@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Urban Style | Tienda de Ropa</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; line-height: 1.6; }
+    header { background: #111; color: #fff; padding: 20px; text-align: center; }
+    header h1 { letter-spacing: 4px; font-size: 2rem; }
+    header p { color: #bbb; font-size: 0.9rem; }
+    nav { background: #222; text-align: center; padding: 10px; position: sticky; top: 0; z-index: 10; }
+    nav a { color: #fff; text-decoration: none; margin: 0 15px; font-size: 0.95rem; cursor: pointer; }
+    nav a:hover { color: #f4b942; }
+    .hero { display: flex; flex-wrap: wrap; align-items: center; max-width: 1000px; margin: 40px auto; padding: 0 20px; gap: 30px; }
+    .hero .texto { flex: 1 1 350px; }
+    .hero h2 { font-size: 1.8rem; margin-bottom: 15px; }
+    .hero p { margin-bottom: 12px; }
+    .boton { display: inline-block; background: #f4b942; color: #111; padding: 10px 25px; border-radius: 25px; text-decoration: none; font-weight: bold; margin-top: 10px; border: none; cursor: pointer; font-size: 1rem; }
+    .boton:hover { background: #e0a52f; }
+    .categorias { background: #f5f5f5; padding: 40px 20px; text-align: center; }
+    .categorias h2 { margin-bottom: 25px; }
+    .lista { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .tarjeta { background: #fff; padding: 25px; border-radius: 10px; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,.1); border: none; cursor: pointer; font-size: 1rem; transition: transform .2s; }
+    .tarjeta:hover { transform: translateY(-5px); }
+    .tarjeta .emoji { font-size: 2.5rem; display: block; }
+    .catalogo { display: none; max-width: 1100px; margin: 0 auto; padding: 50px 20px; text-align: center; }
+    .catalogo.visible { display: block; }
+    .catalogo h2 { margin-bottom: 20px; }
+    .filtros { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 30px; }
+    .filtro { background: #fff; border: 2px solid #222; border-radius: 20px; padding: 8px 20px; cursor: pointer; font-size: 0.95rem; }
+    .filtro.activo, .filtro:hover { background: #222; color: #fff; }
+    .productos { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 25px; }
+    .producto { background: #fff; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.15); text-align: left; }
+    .producto .info { padding: 15px; }
+    .producto h3 { font-size: 1.05rem; }
+    .producto .tipo { color: #888; font-size: 0.85rem; }
+    .producto .precio { font-weight: bold; color: #c47d00; margin-top: 5px; }
+    footer { background: #111; color: #ddd; text-align: center; padding: 30px 20px; }
+    footer h3 { margin-bottom: 10px; color: #f4b942; }
+    footer a { color: #f4b942; text-decoration: none; }
+    footer small { display: block; margin-top: 15px; color: #888; }
+    .foto { position: relative; display: flex; align-items: center; justify-content: center; font-size: 5rem; background: linear-gradient(135deg,#ececec,#cfcfcf); overflow: hidden; }
+    .foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .producto .foto { height: 240px; }
+    .hero .portada { flex: 1 1 350px; min-height: 280px; font-size: 7rem; border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,.2); }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>URBAN STYLE</h1>
+    <p>Creado por: Tomás Jaramillo 11-5</p>
+  </header>
+
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#categorias">Categorías</a>
+    <a onclick="mostrarCatalogo('Todo')">Catálogo</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+
+  <section class="hero" id="inicio">
+    <div class="foto portada"><span>🛍️</span><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800" alt="Imagen principal" onerror="this.remove()"></div>
+    <div class="texto">
+      <h2>Idea del proyecto</h2>
+      <p>Urban Style es una tienda de ropa en línea donde los clientes pueden ver el catálogo, elegir su talla y color, y comprar desde el celular o el computador.</p>
+      <p>La idea es construir la página en <strong>React</strong>, con componentes para el catálogo, el carrito de compras y los filtros por categoría.</p>
+      <button class="boton" onclick="mostrarCatalogo('Todo')">Conoce nuestro catálogo</button>
+    </div>
+  </section>
+
+  <section class="categorias" id="categorias">
+    <h2>Nuestras categorías</h2>
+    <div class="lista">
+      <button class="tarjeta" onclick="mostrarCatalogo('Camisetas')"><span class="emoji">👕</span><h3>Camisetas</h3></button>
+      <button class="tarjeta" onclick="mostrarCatalogo('Jeans')"><span class="emoji">👖</span><h3>Jeans</h3></button>
+      <button class="tarjeta" onclick="mostrarCatalogo('Chaquetas')"><span class="emoji">🧥</span><h3>Chaquetas</h3></button>
+      <button class="tarjeta" onclick="mostrarCatalogo('Zapatos')"><span class="emoji">👟</span><h3>Zapatos</h3></button>
+    </div>
+  </section>
+
+  <section class="catalogo" id="catalogo">
+    <h2>Catálogo</h2>
+    <div class="filtros" id="filtros"></div>
+    <div class="productos" id="productos"></div>
+  </section>
+
+  <footer id="contacto">
+    <h3>Contacto</h3>
+    <p>📧 <a href="mailto:contacto@urbanstyle.com">contacto@urbanstyle.com</a></p>
+    <p>📱 +57 304 427 5073</p>
+    <p>📍 Medellín, Colombia</p>
+    <small>© 2026 Urban Style. Todos los derechos reservados.</small>
+  </footer>
+
+  <script>
+
+    // Fotos de Unsplash. Si alguna no carga, se muestra el emoji. Para usar fotos propias, cambia el "img" por una ruta local (ej. 'img/foto.jpg').
+    const productos = [
+      { nombre: 'Camiseta Blanca Básica', tipo: 'Camisetas', precio: 45000, emoji: '👕', img: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&h=450&fit=crop' },
+      { nombre: 'Camiseta Oversize Negra', tipo: 'Camisetas', precio: 60000, emoji: '👕', img: 'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=600&h=450&fit=crop' },
+      { nombre: 'Camisa Casual', tipo: 'Camisetas', precio: 75000, emoji: '👔', img: 'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=600&h=450&fit=crop' },
+      { nombre: 'Jean Azul Clásico', tipo: 'Jeans', precio: 120000, emoji: '👖', img: 'https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=450&fit=crop' },
+      { nombre: 'Jean Slim Oscuro', tipo: 'Jeans', precio: 135000, emoji: '👖', img: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&h=450&fit=crop' },
+      { nombre: 'Jean Desgastado', tipo: 'Jeans', precio: 128000, emoji: '👖', img: 'https://images.unsplash.com/photo-1604176354204-9268737828e4?w=600&h=450&fit=crop' },
+      { nombre: 'Chaqueta de Jean', tipo: 'Chaquetas', precio: 190000, emoji: '🧥', img: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=600&h=450&fit=crop' },
+      { nombre: 'Chaqueta Cortavientos', tipo: 'Chaquetas', precio: 170000, emoji: '🧥', img: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=450&fit=crop' },
+      { nombre: 'Chaqueta de Cuero', tipo: 'Chaquetas', precio: 320000, emoji: '🧥', img: 'https://images.unsplash.com/photo-1539533018447-63fcce2678e3?w=600&h=450&fit=crop' },
+      { nombre: 'Tenis Deportivos Rojos', tipo: 'Zapatos', precio: 210000, emoji: '👟', img: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&h=450&fit=crop' },
+      { nombre: 'Tenis Urbanos', tipo: 'Zapatos', precio: 195000, emoji: '👟', img: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=600&h=450&fit=crop' },
+      { nombre: 'Tenis Running', tipo: 'Zapatos', precio: 230000, emoji: '👟', img: 'https://images.unsplash.com/photo-1460353581641-37baddab0fa2?w=600&h=450&fit=crop' }
+    ];
+
+    const categorias = ['Todo', 'Camisetas', 'Jeans', 'Chaquetas', 'Zapatos'];
+    const formato = n => '$' + n.toLocaleString('es-CO');
+
+    function mostrarCatalogo(filtro) {
+      document.getElementById('catalogo').classList.add('visible');
+
+      document.getElementById('filtros').innerHTML = categorias.map(c =>
+        `<button class="filtro ${c === filtro ? 'activo' : ''}" onclick="mostrarCatalogo('${c}')">${c}</button>`
+      ).join('');
+
+      const lista = filtro === 'Todo' ? productos : productos.filter(p => p.tipo === filtro);
+      document.getElementById('productos').innerHTML = lista.map(p => `
+        <article class="producto">
+          <div class="foto"><span>${p.emoji}</span><img src="${p.img}" alt="${p.nombre}" onerror="this.remove()"></div>
+          <div class="info">
+            <h3>${p.nombre}</h3>
+            <div class="tipo">${p.tipo}</div>
+            <div class="precio">${formato(p.precio)}</div>
+          </div>
+        </article>`).join('');
+
+      document.getElementById('catalogo').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
